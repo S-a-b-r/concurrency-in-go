@@ -1,3 +1,11 @@
+---
+title: Concurrency in Go
+subtitle: Перевод на русский язык выполнен S-a-b-r, с полной версией можно ознакомиться на https://github.com/S-a-b-r/concurrency-in-go
+author: Katherine Cox-Buday
+date: 2026
+lang: ru
+---
+
 # Глава 1. Введение в конкурентность
 
 

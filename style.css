@@ -1,29 +1,55 @@
-.section-break {
-  margin: 1.5em 0;
-  height: 1px;
-  background: #ddd;
+body {
+  font-family: "DejaVu Serif", "Times New Roman", serif;
+  font-size: 11pt;
+  line-height: 1.5;
+  max-width: none;
+  margin: 0;
+  padding: 0;
 }
 
-pre, code {
-  font-family: monospace, serif;
-  font-size: 90%;
+/* Титульная страница */
+#title-block-header {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  page-break-after: always;
 }
+#title-block-header h1.title { font-size: 32pt; margin-bottom: 0.5em; }
+#title-block-header .subtitle { font-size: 16pt; color: #555; }
+#title-block-header .author,
+#title-block-header .date { margin-top: 1em; font-size: 13pt; }
 
-pre {
-  margin: 0.8em 0;
-  padding: 0.5em;
-  border: 1px solid #eee;
-  border-radius: 0.2em;
-  background: #f5f5f5;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-}
-
-img {
+/* Оглавление */
+#TOC { page-break-after: always; }
+#TOC::before {
+  content: "Оглавление";
   display: block;
-  width: 96%;
-  max-width: 96%;
-  height: auto;
-  margin: 1em auto;
-  object-fit: contain;
+  font-size: 20pt;
+  font-weight: bold;
+  margin-bottom: 1em;
 }
+#TOC ul { list-style: none; padding-left: 1.2em; }
+#TOC > ul { padding-left: 0; }
+#TOC a { text-decoration: none; color: inherit; }
+/* Номера страниц в оглавлении с точками */
+#TOC a::after {
+  content: leader('.') target-counter(attr(href), page);
+}
+
+/* Каждая глава с новой страницы */
+h1 { page-break-before: always; }
+#title-block-header h1 { page-break-before: avoid; }
+h1, h2, h3 { page-break-after: avoid; }
+
+pre, code { font-size: 9pt; }
+pre { white-space: pre-wrap; background: #f4f4f4; padding: 0.6em; }
+
+@page {
+  size: A4;
+  margin: 2cm 2cm 2.2cm 2cm;
+  @bottom-center { content: counter(page); font-size: 9pt; }
+}
+@page :first { @bottom-center { content: none; } }
